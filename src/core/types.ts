@@ -1,4 +1,17 @@
-import type { SelfCleanbaleListStoreData } from "./store";
+
+export type ProductLocationStoreData = {
+  productLocationMap: ProductLocation,
+  general: Product[];
+  fruits: Product[];
+  vegitables: Product[];
+}
+
+export type ProductLocationStoreActions = {
+  changeLocation: (uuid: UUID) => void;
+  resetLocation: (uuid: UUID) => void;
+}
+
+export type ProductLocationStore = ProductLocationStoreData & ProductLocationStoreActions;
 
 export type ValueOf<T> = T[keyof T]
 
@@ -29,5 +42,5 @@ export type UUID = `${string}-${string}-${string}-${string}-${string}`
 export type ProductMap = Map<UUID, Product>;
 export type ProductLocation = Map<UUID, ProductLocationType>
 
-export type MoveProductToGroupData = SelfCleanbaleListStoreData & { product: Product }
+export type MoveProductToGroupData = ProductLocationStoreData & { product: Product }
 export type MoveProductToDefaultGroupData = MoveProductToGroupData

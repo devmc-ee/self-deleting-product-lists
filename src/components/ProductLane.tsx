@@ -17,7 +17,11 @@ export const ProductLane: FC<ProductLaneProps> = ({ type, headerText = "", class
   const changeLocation = useStore(({ changeLocation }) => changeLocation);
   const resetLocation = useStore(({ resetLocation }) => resetLocation);
 
-  const onChangeLocation = (uuid: UUID): void => {
+  const onClick = (uuid: UUID): void => {
+    if (headerText) {
+      return resetLocation(uuid)
+    } 
+
     changeLocation(uuid);
 
     setTimeout(() => {
@@ -31,7 +35,7 @@ export const ProductLane: FC<ProductLaneProps> = ({ type, headerText = "", class
         <h2>{headerText}</h2>
       </div>}
       <div className="product-lane__body">
-        <ProductButtonList onClick={headerText ? resetLocation : onChangeLocation} items={products} />
+        <ProductButtonList onClick={onClick} items={products} />
       </div>
     </div>
   );

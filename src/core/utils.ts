@@ -1,4 +1,3 @@
-import type { SelfCleanbaleListStoreData } from "./store";
 import {
   PRODUCT_GROUP, PRODUCT_LOCATION,
   type MoveProductToDefaultGroupData,
@@ -7,6 +6,7 @@ import {
   type ProductLocation,
   type ProductLocationType,
   type ProductMap,
+  type ProductLocationStoreData,
   type UUID
 } from "./types";
 import { v4 as uuidv4 } from "uuid";
@@ -47,7 +47,7 @@ export const moveProductToItsGroup = ({
   fruits,
   vegitables,
   productLocationMap
-}: MoveProductToGroupData): SelfCleanbaleListStoreData => {
+}: MoveProductToGroupData): ProductLocationStoreData => {
   if (!productLocationMap || !product) {
     return {
       general,
@@ -56,7 +56,7 @@ export const moveProductToItsGroup = ({
       productLocationMap
     }
   }
-  const newProductLocationMap = new Map([...productLocationMap.entries()]); // O(n)
+  const newProductLocationMap = new Map([...productLocationMap.entries()]);
   const { uuid, type } = product;
 
   if (!newProductLocationMap.has(uuid) || !Object.values(PRODUCT_GROUP).includes(type)) {
@@ -99,7 +99,7 @@ export const resetProductLocation = ({
   fruits,
   vegitables,
   general
-}: MoveProductToDefaultGroupData): SelfCleanbaleListStoreData => {
+}: MoveProductToDefaultGroupData): ProductLocationStoreData => {
   if (!product || !productLocationMap) {
     return {
       productLocationMap,
